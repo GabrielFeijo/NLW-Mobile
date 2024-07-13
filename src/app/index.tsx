@@ -2,6 +2,7 @@ import { Button } from '@/components/button';
 import { Calendar } from '@/components/calendar';
 import { GuestEmail } from '@/components/email';
 import { Input } from '@/components/input';
+import { Loading } from '@/components/loading';
 import { Modal } from '@/components/modal';
 import { tripServer } from '@/server/trip-server';
 import { tripStorage } from '@/storage/trip';
@@ -18,7 +19,7 @@ import {
 	Settings2,
 	UserRoundPlus,
 } from 'lucide-react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Image, Keyboard, Text, View } from 'react-native';
 import { DateData } from 'react-native-calendars';
 
@@ -35,6 +36,7 @@ enum MODAL {
 
 export default function Index() {
 	const [isCreatingTrip, setIsCreatingTrip] = useState(false);
+	const [isGettingTrip, setIsGettingTrip] = useState(true);
 
 	const [selectedDates, setSelectedDates] = useState<DatesSelected>();
 	const [stepForm, setStepForm] = useState<StepForm>(StepForm.TRIP_DETAILS);
@@ -135,6 +137,37 @@ export default function Index() {
 		} finally {
 			setIsCreatingTrip(false);
 		}
+	}
+
+	async function getTrip() {
+		try {
+			const tripId = await tripStorage.get();
+
+			if (!tripId) {
+				return setIsGettingTrip(false);
+			}
+
+			const trip = await tripServer.getById(tripId);
+
+			if (trip) {
+				return router.navigate(`/trip/${tripId}`);
+			}
+		} catch (error) {
+			Alert.alert('Erro ao buscar viagem', 'Por favor, tente novamente.');
+		} finally {
+			setIsGettingTrip(false);
+		}
+	}
+
+	useEffect(() => {
+		async function fetchTrip() {
+			await getTrip();
+		}
+		fetchTrip();
+	}, []);
+
+	if (isGettingTrip) {
+		return <Loading />;
 	}
 
 	return (

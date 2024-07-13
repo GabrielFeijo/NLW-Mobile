@@ -1,7 +1,7 @@
 import { api } from './api';
 
 export type TripDetails = {
-	id: number;
+	id: string;
 	destination: string;
 	starts_at: string;
 	ends_at: string;
@@ -42,7 +42,26 @@ async function create({
 	}
 }
 
+async function update({
+	id,
+	destination,
+	starts_at,
+	ends_at,
+}: Omit<TripDetails, 'is_confirmed'>) {
+	try {
+		const { data } = await api.put<{ trip: TripDetails }>(`/trips/${id}`, {
+			destination,
+			starts_at,
+			ends_at,
+		});
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}
+
 export const tripServer = {
 	getById,
 	create,
+	update,
 };
