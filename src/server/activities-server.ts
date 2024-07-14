@@ -19,7 +19,7 @@ type ActivityResponse = {
 
 async function create({ tripId, occurs_at, title }: ActivityCreate) {
 	try {
-		const { data } = await api.post<{ activityId: string }>(
+		const { data } = await api.post<{ activity: Activity }>(
 			`/trips/${tripId}/activities`,
 			{ occurs_at, title }
 		);

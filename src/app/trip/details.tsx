@@ -43,11 +43,13 @@ export function Details({ tripId }: { tripId: string }) {
 
 			setIsCreatingLinkTrip(true);
 
-			await linksServer.create({
+			const data = await linksServer.create({
 				tripId,
 				title: linkTitle,
 				url: linkURL,
 			});
+
+			setLinks((prevState) => [...prevState, data.link]);
 
 			Alert.alert('Link', 'Link criado com sucesso!');
 			resetNewLinkFields();

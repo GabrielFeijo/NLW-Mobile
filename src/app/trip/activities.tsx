@@ -66,13 +66,35 @@ export function Activities({ tripDetails }: Props) {
 			}
 			setIsCreatingActivity(true);
 
-			await activitiesServer.create({
+			const data = await activitiesServer.create({
 				tripId: tripDetails.id,
 				title: activityTitle,
 				occurs_at: dayjs(activityDate)
 					.add(Number(activityHour), 'h')
 					.toString(),
 			});
+
+			const newActivity = data.activity;
+
+			setTripActivities((prevState) =>
+				prevState.map((trip) => {
+					if (trip.title.dayNumber === dayjs(newActivity.occurs_at).date()) {
+						return {
+							...trip,
+							data: [
+								...trip.data,
+								{
+									id: newActivity.id,
+									title: newActivity.title,
+									hour: dayjs(newActivity.occurs_at).format('HH[:]mm[h]'),
+									isBefore: dayjs(newActivity.occurs_at).isBefore(dayjs()),
+								},
+							],
+						};
+					}
+					return trip;
+				})
+			);
 
 			Alert.alert('Sucesso', 'Atividade criada com sucesso!');
 			resetNewActivityFields();

@@ -21,10 +21,10 @@ async function getLinksByTripId(tripId: string) {
 
 async function create({ tripId, title, url }: LinkCreate) {
 	try {
-		const { data } = await api.post<{ linkId: string }>(
-			`/trips/${tripId}/links`,
-			{ title, url }
-		);
+		const { data } = await api.post<{ link: Link }>(`/trips/${tripId}/links`, {
+			title,
+			url,
+		});
 
 		return data;
 	} catch (error) {
