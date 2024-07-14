@@ -13,13 +13,14 @@ import {
 	Settings2,
 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { Alert, Keyboard, TouchableOpacity, View } from 'react-native';
+import { Alert, Keyboard, TouchableOpacity, View, Text } from 'react-native';
 import { Activities } from './activities';
 import { Details } from './details';
 import { Modal } from '@/components/modal';
 import { Calendar } from '@/components/calendar';
 import { DateData } from 'react-native-calendars';
 import { DatesSelected, calendarUtils } from '@/utils/calendarUtils';
+import { tripStorage } from '@/storage/trip';
 
 export type TripData = TripDetails & { when: string };
 
@@ -129,6 +130,26 @@ export default function Trip() {
 			Alert.alert('Erro ao atualizar viagem', 'Por favor, tente novamente.');
 		} finally {
 			setIsUpdatingTrip(false);
+		}
+	}
+
+	async function handleRemoveTrip() {
+		try {
+			Alert.alert('Remover viagem', 'Tem certeza que deseja remover a viagem', [
+				{
+					text: 'Não',
+					style: 'cancel',
+				},
+				{
+					text: 'Sim',
+					onPress: async () => {
+						await tripStorage.remove();
+						router.navigate('/');
+					},
+				},
+			]);
+		} catch (error) {
+			console.log(error);
 		}
 	}
 
@@ -245,6 +266,15 @@ export default function Trip() {
 					>
 						<Button.Title>Atualizar</Button.Title>
 					</Button>
+
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={handleRemoveTrip}
+					>
+						<Text className='text-red-400 text-center mt-6'>
+							Remover viagem
+						</Text>
+					</TouchableOpacity>
 				</View>
 			</Modal>
 
