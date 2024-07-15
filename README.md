@@ -33,12 +33,12 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
 
 ```bash
 # Clone o repositório
-$ git clone https://github.com/GabrielFeijo/NLW-Journey-Mobile
+$ git clone https://github.com/GabrielFeijo/NLW-Mobile
 ```
 
 ```bash
 # Acesse a pasta do projeto em terminal/cmd
-$ cd NLW-Journey-Mobile
+$ cd NLW-Mobile
 
 # Instale as dependências
 npm install
