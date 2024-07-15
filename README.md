@@ -6,13 +6,13 @@ O projeto atual, chamado Planner, é um planejador de viagens onde os usuários 
 
 ## 💻 Imagens da plataforma
 
-<img src="https://i.imgur.com/CowNPhD.png" width="414"/>
+<img src="https://i.imgur.com/8FGvdTw.png" width="300"/>
 
 ### Detalhes da viagem
 
-<img src="https://i.imgur.com/qdIjOaB.png" width="414"/>
+<img src="https://i.imgur.com/P7GXaCK.png" width="300"/>
 
-<img src="https://i.imgur.com/K3480vc.png" width="414"/>
+<img src="https://i.imgur.com/R5bu4lS.png" width="300"/>
 
 ## 🚀 Início
 
@@ -49,4 +49,4 @@ $ npx expo start
 
 ## 🛠️ Feito utilizando
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40" height="45" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="40" height="45" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" width="40" height="45" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="45" height="45"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40" height="45" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="40" height="45" /> <img src="https://i.imgur.com/3soqRcx.png" width="40" height="45" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="45" height="45"/>
